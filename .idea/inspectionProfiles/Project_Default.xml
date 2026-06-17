@@ -1,0 +1,65 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="dj-database-url" />
+          <option value="gunicorn" />
+          <option value="psycopg2-binary" />
+          <option value="whitenoise" />
+          <option value="aiohappyeyeballs" />
+          <option value="aiohttp" />
+          <option value="aiohttp-retry" />
+          <option value="aiosignal" />
+          <option value="asgiref" />
+          <option value="attrs" />
+          <option value="certifi" />
+          <option value="charset-normalizer" />
+          <option value="Django" />
+          <option value="django-filter" />
+          <option value="django-jazzmin" />
+          <option value="django-stubs" />
+          <option value="django-stubs-ext" />
+          <option value="djangorestframework" />
+          <option value="djangorestframework-stubs" />
+          <option value="djangorestframework_simplejwt" />
+          <option value="drf-spectacular" />
+          <option value="drf-yasg" />
+          <option value="frozenlist" />
+          <option value="idna" />
+          <option value="inflection" />
+          <option value="jsonschema" />
+          <option value="jsonschema-specifications" />
+          <option value="multidict" />
+          <option value="packaging" />
+          <option value="pillow" />
+          <option value="propcache" />
+          <option value="PyJWT" />
+          <option value="python-decouple" />
+          <option value="pytz" />
+          <option value="PyYAML" />
+          <option value="referencing" />
+          <option value="requests" />
+          <option value="rpds-py" />
+          <option value="sqlparse" />
+          <option value="twilio" />
+          <option value="types-PyYAML" />
+          <option value="typing_extensions" />
+          <option value="tzdata" />
+          <option value="uritemplate" />
+          <option value="urllib3" />
+          <option value="yarl" />
+          <option value="setuptools" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStubPackagesAdvertiser" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="djangorestframework" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.nomi }} | XON PLUS GROUP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-gold: #fbbf24;
+            --dark-industrial: #1f2937;
+            --light-bg: #f9fafb;
+        }
+        body { background-color: var(--light-bg); font-family: 'Segoe UI', sans-serif; }
+        .bg-industrial { background-color: var(--dark-industrial); }
+        .text-gold { color: var(--accent-gold); }
+        .btn-gold { background-color: var(--accent-gold); color: var(--dark-industrial); font-weight: bold; }
+        .badge-xpg { background-color: var(--primary-blue); color: white; padding: 6px 12px; border-radius: 4px; font-weight: bold; }
+        .product-img { width: 100%; max-height: 450px; object-fit: cover; border-radius: 12px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-industrial sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <div class="d-flex flex-column">
+                    <span class="fw-bold h5 mb-0 text-white">XON PLUS GROUP</span>
+                </div>
+            </a>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Asosiy sahifa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'all_products' %}">Uskunalar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show text-center fw-bold shadow-sm mb-4" role="alert">
+                    ✨ {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row g-5">
+            <div class="col-lg-6">
+                {% if product.rasm %}
+                    <img src="{{ product.rasm.url }}" class="product-img shadow-sm" alt="{{ product.nomi }}">
+                {% else %}
+                    <div style="height: 400px; background: #e5e7eb; border-radius: 12px;" class="d-flex align-items-center justify-content-center text-muted">
+                        <span>Rasm yuklanmagan</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-6">
+                <div class="mb-3">
+                    <span class="badge-xpg">
+                        {% if 'mahalliy' in product.ishlab_chiqarilgan_joyi|lower %}
+                            🇺🇿 Mahalliy ishlab chiqarish
+                        {% else %}
+                            🇨🇳 Xitoy texnologiyasi
+                        {% endif %}
+                    </span>
+                </div>
+
+                <h1 class="fw-bold text-dark mb-3">{{ product.nomi }}</h1>
+                <p class="fs-5 text-muted mb-4">{{ product.izoh }}</p>
+
+                <hr class="my-4">
+
+                <div class="card border-0 shadow-sm p-4 bg-white rounded-4">
+                    <h5 class="fw-bold mb-3 text-primary">⚡ Ushbu uskuna bo'yicha narx va tijoriy taklif olish</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Ismingiz</label>
+                            <input type="text" name="ism" class="form-control py-2" placeholder="Masalan: Dilshod" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Telefon raqamingiz</label>
+                            <input type="tel" name="telefon" class="form-control py-2" placeholder="+998" required>
+                        </div>
+                        <button type="submit" class="btn btn-gold btn-lg w-100 py-2 shadow-sm text-dark mt-2">Menejerdan qo'ng'iroq kutish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XON PLUS GROUP | Industrial Equipment & Production Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-gold: #fbbf24;
+            --dark-industrial: #1f2937;
+            --light-bg: #f3f4f6;
+        }
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        .bg-industrial { background-color: var(--dark-industrial); }
+        .hero-banner {
+            background: linear-gradient(rgba(31, 41, 55, 0.9), rgba(31, 41, 55, 0.98)),
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: white;
+            padding: 80px 0;
+            border-bottom: 5px solid var(--accent-gold);
+        }
+        .logo-img { max-height: 40px; margin-right: 10px; }
+        .card { border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .badge-xpg { background-color: var(--primary-blue); color: white; padding: 5px 10px; border-radius: 4px; }
+        .text-gold { color: var(--accent-gold); }
+        .btn-gold { background-color: var(--accent-gold); color: var(--dark-industrial); font-weight: bold; }
+        .btn-gold:hover { background-color: #f59e0b; color: var(--dark-industrial); }
+        .filter-btn.active { background-color: var(--accent-gold) !important; color: var(--dark-industrial) !important; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-industrial sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+
+                <div class="d-flex flex-column">
+                    <span class="fw-bold h5 mb-0 text-white">XON PLUS GROUP</span>
+                    <span class="small text-gold" style="font-size: 0.7rem;">Industrial Equipment</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Asosiy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#katalog">Katalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'all_products' %}">uskunalar</a></li>
+                    <li class="nav-item px-2">
+                <a class="nav-link fw-bold text-white" href="tel:+998993464443">📞 +998 (99) 346-44-43</a>
+                <a class="nav-link fw-bold text-white" href="tel:+998777013636">📞 +998 (77) 701-36-36</a></li>
+                <a class="nav-link fw-bold text-white" href="tel:+998994672364">📞 +998 (77) 701-36-36</a></li>
+                <a class="nav-link fw-bold text-white" href="tel:+998994364443">📞 +998 (99) 436-44-43</a></li>
+
+                    <li class="nav-item"><a class="nav-link btn btn-gold px-3 ms-lg-2 text-dark" href="#aloqa">Arizangizni qoldiring</a></li>
+    </ul>
+</div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-banner text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">XON PLUS GROUP</h1>
+            <p class="lead mt-3 text-gold fw-bold text-uppercase">Industrial Equipment & Production Solutions</p>
+            <p class="max-w-2xl mx-auto text-light mb-4">
+                Korxonangiz quvvatini oshiruvchi yirik sanoat liniyalari va avtomatlashtirilgan uskunalar yetkazib beramiz.
+            </p>
+            <a href="#katalog" class="btn btn-gold btn-lg fw-bold px-4">Katalogga o'tish</a>
+        </div>
+    </header>
+
+    <div class="container my-5">
+    <div id="katalog" class="text-center mb-5">
+        <h2 class="fw-bold">Yangi Qo'shilgan Uskunalar</h2>
+        <p class="text-muted">Eng so'nggi texnologik yechimlar</p>
+    </div>
+
+    <div class="row g-4">
+    {% for product in products %}
+    <div class="col-md-4">
+        <div class="card h-100">
+            {% if product.rasm %}
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.rasm.url }}" class="card-img-top" alt="{{ product.nomi }}" style="height: 220px; object-fit: cover;">
+                </a>
+            {% else %}
+                <div style="height: 220px; background: #e2e8f0;" class="d-flex align-items-center justify-content-center text-muted">
+                    <span>[Rasm yuklanmagan]</span>
+                </div>
+            {% endif %}
+
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge-xpg shadow-sm">
+                        {% if 'mahalliy' in product.ishlab_chiqarilgan_joyi|lower %}
+                            🇺🇿 Mahalliy
+                        {% else %}
+                            🇨🇳 Xitoy
+                        {% endif %}
+                    </span>
+                </div>
+
+                <h5 class="card-title fw-bold">
+                    <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark" style="transition: color 0.2s;">
+                        {{ product.nomi }}
+                    </a>
+                </h5>
+
+                <p class="card-text text-muted small">{{ product.izoh }}</p>
+                <hr>
+
+                <a href="#aloqa" class="btn btn-outline-primary w-100 mt-2 fw-bold" onclick="setSelectProduct('{{ product.id }}')">Tijoriy taklif olish</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'all_products' %}" class="btn btn-gold btn-lg px-4 fw-bold shadow-sm">Barcha Uskunalarni Ko'rish &rarr;</a>
+    </div>
+</div>
+    <div class="container my-5 pt-4">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Muvaffaqiyatli Yetkazib Berilgan Loyihalarimiz</h2>
+        <p class="text-muted">XON PLUS GROUP tomonidan o'rnatilgan va hozirda ishlayotgan sanoat liniyalari</p>
+    </div>
+
+    <div class="row g-4">
+        {% for project in completed_projects %}
+        <div class="col-md-4 col-sm-6">
+            <div class="position-relative overflow-hidden rounded-4 shadow-sm group" style="height: 250px;">
+                <img src="{{ project.rasm.url }}" alt="{{ project.nomi }}" class="w-100 h-100" style="object-fit: cover; transition: transform 0.3s;">
+
+                <div class="position-absolute bottom-0 start-0 w-100 p-3 bg-dark bg-opacity-75 text-white">
+                    <h6 class="fw-bold mb-1 text-gold">{{ project.nomi }}</h6>
+                    <small class="text-white-50">📍 {{ project.joyi }}</small>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-muted">Tez orada bu yerda o'rnatilgan uskunalarimiz rasmlari joylashtiriladi.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    <div id="aloqa" class="container my-5 py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card border-0 shadow-lg p-5 bg-white rounded-4" style="border-top: 5px solid var(--accent-gold) !important;">
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show text-center fw-bold mb-4" role="alert">
+                                ✨ {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold text-dark">Tezkor Ariza Qoldirish</h3>
+                        <p class="text-muted small">Mutaxassislarimiz siz bilan tez orada bog'lanishadi</p>
+                    </div>
+
+                    <form method="POST" action="">
+                        {% csrf_token %} <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Sizni qiziqtirgan uskuna</label>
+                            <select name="uskuna_id" id="uskuna-select" class="form-select py-2" required>
+                                <option value="" disabled selected>Uskunani tanlang...</option>
+                                {% for product in products %}
+                                    <option value="{{ product.id }}">{{ product.nomi }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Ism-sharifingiz</label>
+                            <input type="text" name="ism" class="form-control py-2" placeholder="Masalan: Baxromjon" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">Telefon raqamingiz</label>
+                            <input type="tel" name="telefon" class="form-control py-2" placeholder="+998" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-gold w-100 py-2 shadow-sm text-dark mt-2 text-uppercase">Arizani jo'natish</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+  <footer class="bg-industrial text-white pt-5 pb-4 mt-5" style="border-top: 4px solid var(--accent-gold);">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <h5 class="fw-bold text-gold mb-3">XON PLUS GROUP</h5>
+                <p class="small text-white-50">Kompaniyamiz Xitoy va mahalliy ishlab chiqaruvchilardan eng sifatli va zamonaviy sanoat uskunalarini yetkazib berish bilan shug'ullanadi.</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h5 class="fw-bold text-gold mb-3">Aloqa Markazi</h5>
+                <p class="mb-1 text-white-50 small">Sotuv bo'limi:</p>
+                <a href="tel:+998777013636" class="text-white h6 fw-bold text-decoration-none d-block mb-2">📞 +998 (77) 701-36-36</a>
+                <a href="tel:+998994672364" class="text-white h6 fw-bold text-decoration-none d-block mb-2">📞 +998 (99) 467-23-64</a>
+                <a href="tel:+998994364443" class="text-white h6 fw-bold text-decoration-none d-block mb-2">📞 +998 (99) 436-44-43</a>
+                <a href="tel:+998993464443" class="text-white h6 fw-bold text-decoration-none d-block mb-3">📞 +998 (99) 346-44-43</a>
+                <p class="text-white-50 small mb-0">Ish vaqti: Dush - Shanba (8:00 - 20:00)</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h5 class="fw-bold text-gold mb-3">Bizning Manzil</h5>
+                <p class="text-white small mb-2">📍 Bog'dod tumani, Govxona qishlog'i, Qo'shchinor MFY binosi yonida</p>
+                <div class="rounded overflow-hidden shadow-sm border border-secondary" style="height: 120px;">
+                    <iframe src="https://yandex.ru/map-widget/v1/?ll=71.2222%2C40.5050&z=13"
+                            width="100%"
+                            height="100%"
+                            frameborder="0"
+                            allowfullscreen="true"
+                            style="position:relative; border:0;">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 text-md-start text-lg-end">
+                <h5 class="fw-bold text-gold mb-3">Bizni kuzating</h5>
+                <p class="small text-white-50">Yangi kelgan uskunalar va videolarni ijtimoiy tarmoqlarimizda ko'ring:</p>
+                <div class="d-flex flex-column gap-2 mt-2 align-items-lg-end">
+                    <a href="https://t.me/uskunalar_Savdosi" target="_blank" class="btn btn-outline-info text-white fw-bold btn-sm px-3 w-100" style="max-width: 200px;">
+                        ✈️ Telegram Kanal
+                    </a>
+                    <a href="https://www.instagram.com/xonplus.shopuz?igsh=MTQwaDVpYnhqYWF4Yw==" target="_blank" class="btn btn-outline-danger text-white fw-bold btn-sm px-3 w-100" style="max-width: 200px;">
+                        📸 Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4 border-secondary">
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-0 small text-white-50">&copy; 2026. XON PLUS GROUP. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 2-Shart uchun: Katalog filtr funksiyasi
+        function filterProducts(category) {
+            // Aktiv tugma dizaynini o'zgartirish
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.product-item');
+
+            items.forEach(item => {
+                const itemType = item.getAttribute('data-type');
+
+                if (category === 'all') {
+                    item.style.display = 'block'; // Hammasini ko'rsatish
+                } else if (category === 'mahalliy' && itemType.includes('mahalliy')) {
+                    item.style.display = 'block'; // Faqat mahalliy
+                } else if (category === 'xitoy' && (itemType.includes('xitoy') || itemType.includes('china'))) {
+                    item.style.display = 'block'; // Faqat Xitoy
+                } else {
+                    item.style.display = 'none';  // Qolganlarini yashirish
+                }
+            });
+        }
+
+        // Kartochkadagi "Tijoriy taklif olish" bosilganda pastdagi selectni avtomat tanlaydigan funksiya
+        function setSelectProduct(productId) {
+            const selectElement = document.getElementById('uskuna-select');
+            selectElement.value = productId;
+        }
+    </script>
+</body>
+</html>
