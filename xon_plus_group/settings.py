@@ -123,14 +123,13 @@ STATIC_URL = 'static/'
 MEDIA_ROOT=BASE_DIR/'media'
 MEDIA_URL='/media/'
 
+
 STORAGES = {
     "default": {
-        "BACKEND": "django_supabase_storage.SupabaseStorage",  # .storage so'zini olib tashladik
-        "OPTIONS": {
-            "supabase_url": "https://fwhocixtmtrepnshdxca.supabase.co",
-            "supabase_key": "sb_publishable_D9SwUpDIK-S2HO4pfqCurw_gz7Xx89M",
-            "location": "media",
-        },
+        "BACKEND": "django_supabase_storage.SupabaseStorage",
+        "supabase_url": "https://fwhocixtmtrepnshdxca.supabase.co",
+        "supabase_key": "sb_publishable_D9SwUpDIK-S2HO4pfqCurw_gz7Xx89M",
+        "location": "media",
     },
     "staticfiles": {
         "BACKEND": "django.core.files.storage.StaticFilesStorage",
