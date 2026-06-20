@@ -125,11 +125,11 @@ MEDIA_URL='/media/'
 
 STORAGES = {
     "default": {
-        "BACKEND": "django_supabase_storage.storage.SupabaseStorage",
+        "BACKEND": "django_supabase_storage.SupabaseStorage",  # .storage so'zini olib tashladik
         "OPTIONS": {
             "supabase_url": "https://fwhocixtmtrepnshdxca.supabase.co",
             "supabase_key": "sb_publishable_D9SwUpDIK-S2HO4pfqCurw_gz7Xx89M",
-            "location": "media",  # Boya ochgan bucket nomi
+            "location": "media",
         },
     },
     "staticfiles": {
