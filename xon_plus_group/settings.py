@@ -123,18 +123,17 @@ STATIC_URL = 'static/'
 MEDIA_ROOT=BASE_DIR/'media'
 MEDIA_URL='/media/'
 
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://fwhocixtmtrepnshdxca.supabase.co")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "sb_publishable_D9SwUpDIK-S2HO4pfqCurw_gz7Xx89M")
+SUPABASE_BUCKET_NAME = os.environ.get("SUPABASE_BUCKET_NAME", "media")
 
-
+# 2. Storages qismini oddiy holatga keltiramiz
 STORAGES = {
     "default": {
         "BACKEND": "django_supabase_storage.storage_backends.SupabaseStorage",
-        "OPTIONS": {
-            "supabase_url": os.environ.get("SUPABASE_URL", "https://fwhocixtmtrepnshdxca.supabase.co"),
-            "supabase_key": os.environ.get("SUPABASE_KEY", "sb_publishable_D9SwUpDIK-S2HO4pfqCurw_gz7Xx89M"),
-            "location": os.environ.get("SUPABASE_BUCKET_NAME", "media"),
-        },
     },
     "staticfiles": {
         "BACKEND": "django.core.files.storage.StaticFilesStorage",
     },
 }
+
