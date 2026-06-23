@@ -133,7 +133,7 @@ STORAGES = {
         "BACKEND": "django_supabase_storage.storage_backends.SupabaseStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.core.files.storage.StaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
